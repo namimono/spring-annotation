@@ -9,7 +9,8 @@ public class test {
     public void test1(){
         ApplicationContext applicationContext=new AnnotationConfigApplicationContext(Myconfig.class);
         Person person= (Person) applicationContext.getBean("person");
-        System.out.println(person);
+        Person person2= (Person) applicationContext.getBean("person");
+        System.out.println(person==person2);
     }
     @Test
     public void test2(){
