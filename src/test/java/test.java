@@ -1,3 +1,4 @@
+import com.namimono.config.MainConfigOfLifeCycle;
 import com.namimono.config.MyTypeFilter;
 import com.namimono.config.Myconfig;
 import com.namimono.entities.Person;
@@ -36,6 +37,16 @@ public class test {
         showBeans(applicationContext);
 
 
+    }
+
+    @Test
+    public void testLifeCycle(){
+        ApplicationContext applicationContext=new AnnotationConfigApplicationContext(MainConfigOfLifeCycle.class);
+//        applicationContext.getBean("user");
+//        applicationContext.getBean("dog");
+//        showBeans(applicationContext);
+
+        ((AnnotationConfigApplicationContext) applicationContext).close();
     }
 
 }
