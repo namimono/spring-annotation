@@ -32,12 +32,14 @@ import org.springframework.context.annotation.*;
  *
  * BeanPostProcessor原理
  * populateBean(beanName, mbd, instanceWrapper);给bean进行属性赋值
- * initializeBean
+ * 在initializeBean方法中invokeInitMethods用来初始化bean，
+ * 但是在invokeInitMethods之前和之后都有方法applyBeanPostProcessorsBeforeInitialization,applyBeanPostProcessorsAfterInitialization
+ * initializeBean()
  * {
- * applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);
- * invokeInitMethods(beanName, wrappedBean, mbd);执行自定义初始化
- * applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
- *}
+ *      applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);
+ *      invokeInitMethods(beanName, wrappedBean, mbd);执行自定义初始化
+ *      applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
+ * }
  *
  *
  *

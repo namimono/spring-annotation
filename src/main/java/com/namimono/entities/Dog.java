@@ -32,6 +32,9 @@ public class Dog implements ApplicationContextAware {
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		// TODO Auto-generated method stub
 		this.applicationContext = applicationContext;
+		String [] beansName=applicationContext.getBeanDefinitionNames();
+		for (String name:beansName)
+		System.out.println(name);
 	}
 
 
