@@ -30,4 +30,12 @@ public class test {
         showBeans(applicationContext);
     }
 
+    @Test
+    public void testImport(){
+        ApplicationContext applicationContext=new AnnotationConfigApplicationContext(Myconfig.class);
+        showBeans(applicationContext);
+
+
+    }
+
 }

@@ -26,7 +26,7 @@ public class MyTypeFilter implements TypeFilter {
 
         String className = classMetadata.getClassName();
         System.out.println("-------------"+className);
-        if (className.contains("ser")){
+        if (className.contains("p")){
             return true;
         }
         return false;
