@@ -1,10 +1,16 @@
 package com.namimono.entities;
 
 
+import org.springframework.beans.factory.annotation.Value;
+
 public class Person {
+    @Value("1")
     private int id;
+    private int age;
+    @Value("mea")
     private String name;
 
+    private String email;
     public Person() {
     }
 
@@ -33,7 +39,9 @@ public class Person {
     public String toString() {
         return "Person{" +
                 "id=" + id +
+                ", age=" + age +
                 ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }
