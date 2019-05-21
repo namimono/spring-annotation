@@ -4,12 +4,14 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
-public class Dog implements ApplicationContextAware {
+@Component
+public class Dog implements ApplicationContextAware, BeanNameAware {
 	
 	//@Autowired
 	private ApplicationContext applicationContext;
@@ -28,16 +30,13 @@ public class Dog implements ApplicationContextAware {
 		System.out.println("Dog....@PreDestroy...");
 	}
 
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		// TODO Auto-generated method stub
-		this.applicationContext = applicationContext;
-		String [] beansName=applicationContext.getBeanDefinitionNames();
-		for (String name:beansName)
-		System.out.println(name);
+
+	public void setBeanName(String name) {
+		System.out.println("获取到bean的名字为："+name);
 	}
 
-
-
-
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		System.out.println("获取的IOC容器为："+applicationContext);
+		this.applicationContext=applicationContext;
+	}
 }

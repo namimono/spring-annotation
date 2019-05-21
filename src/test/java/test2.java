@@ -38,10 +38,8 @@ public class test2 {
     @Test
     public void testAutowired2(){
         ApplicationContext applicationContext=new AnnotationConfigApplicationContext(MyconfigAutowired.class);
-        Animal bean = applicationContext.getBean(Animal.class);
-        System.out.println(bean);
-        Cat cat = applicationContext.getBean(Cat.class);
-        System.out.println(cat);
+        showBeans(applicationContext);
+        System.out.println(applicationContext);
 
     }
 }
