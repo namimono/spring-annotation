@@ -1,4 +1,6 @@
 1.当配置文件有多个时，不要互相扫描，否则会将其他配置文件的所有bean加入到IOC容器中。
+  且@Component注解包括所有组件注解，所以扫描@Component想到于扫描所有组件
+  Controller，This annotation serves as a specialization of {@link Component @Component}
 
 2.使用autowired的前提是，改类(Dog)已经加入到IOC容器中了
     @Autowired

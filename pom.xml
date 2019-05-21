@@ -6,7 +6,11 @@
 
     <groupId>com.namimono.spring-annotation</groupId>
     <artifactId>spring-annotation-learn</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>test-modal</module>
+    </modules>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->

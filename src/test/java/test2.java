@@ -2,6 +2,8 @@ import com.namimono.config.MyConfigValue;
 import com.namimono.config.Myconfig;
 import com.namimono.config.MyconfigAutowired;
 import com.namimono.dao.PersonDao;
+import com.namimono.entities.Animal;
+import com.namimono.entities.Cat;
 import com.namimono.entities.Person;
 import com.namimono.service.PersonService;
 import org.junit.Test;
@@ -25,12 +27,21 @@ public class test2 {
     }
 
     @Test
-    public void test3(){
+    public void testAutowired(){
         ApplicationContext applicationContext=new AnnotationConfigApplicationContext(MyconfigAutowired.class);
         PersonService bean = applicationContext.getBean(PersonService.class);
         System.out.println(bean);
 //        PersonDao personDao= applicationContext.getBean(PersonDao.class);
 //        System.out.println(personDao);
+
+    }
+    @Test
+    public void testAutowired2(){
+        ApplicationContext applicationContext=new AnnotationConfigApplicationContext(MyconfigAutowired.class);
+        Animal bean = applicationContext.getBean(Animal.class);
+        System.out.println(bean);
+        Cat cat = applicationContext.getBean(Cat.class);
+        System.out.println(cat);
 
     }
 }
