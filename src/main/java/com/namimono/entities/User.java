@@ -8,12 +8,10 @@ public class User implements InitializingBean, DisposableBean {
     public User() {
     }
 
-    @Override
     public void destroy() throws Exception {
         System.out.println("User----Desstroy");
     }
 
-    @Override
     public void afterPropertiesSet() throws Exception {
         System.out.println("User----initializing");
 

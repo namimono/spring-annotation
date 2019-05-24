@@ -1,14 +1,22 @@
+import com.namimono.config.MyConfigProfile;
 import com.namimono.config.MyConfigValue;
 import com.namimono.config.Myconfig;
 import com.namimono.config.MyconfigAutowired;
 import com.namimono.dao.PersonDao;
-import com.namimono.entities.Animal;
-import com.namimono.entities.Cat;
-import com.namimono.entities.Person;
+import com.namimono.entities.*;
 import com.namimono.service.PersonService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.Environment;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+
+import javax.sql.DataSource;
+import java.sql.SQLException;
+import java.util.List;
 
 
 public class test2 {
@@ -40,6 +48,42 @@ public class test2 {
         ApplicationContext applicationContext=new AnnotationConfigApplicationContext(MyconfigAutowired.class);
         showBeans(applicationContext);
         System.out.println(applicationContext);
+
+    }
+/**
+ *
+ *  若要使用profile则要使用无参构造器AnnotationConfigApplicationContext()，并手动配置容器需要注册的配置文件，
+ *  否则无法在容器启动之前配置相应的profile
+ *  public AnnotationConfigApplicationContext(Class<?>... annotatedClasses) {
+ * 		this();
+ * 		register(annotatedClasses);
+ * 		refresh();
+ *   }
+ */
+    @Test
+    public void testProfile(){
+//        ApplicationContext applicationContext=new AnnotationConfigApplicationContext(MyConfigProfile.class);
+        ApplicationContext applicationContext=new AnnotationConfigApplicationContext();
+//        先获取环境，然后设置Profile环境
+        Environment environment = applicationContext.getEnvironment();
+        ((ConfigurableEnvironment )environment) .setActiveProfiles("dev");
+        ((AnnotationConfigApplicationContext) applicationContext).register(MyConfigProfile.class);
+        ((AnnotationConfigApplicationContext) applicationContext).refresh();
+        showBeans(applicationContext);
+
+    }
+    @Test
+    public void testAdd1000k() throws SQLException {
+        ApplicationContext applicationContext=new AnnotationConfigApplicationContext();
+        Environment environment = applicationContext.getEnvironment();
+        ((ConfigurableEnvironment )environment) .setActiveProfiles("test");
+        ((AnnotationConfigApplicationContext) applicationContext).register(MyConfigProfile.class);
+        ((AnnotationConfigApplicationContext) applicationContext).refresh();
+//        showBeans(applicationContext);
+        JdbcTemplate jdbcTemplate = applicationContext.getBean(JdbcTemplate.class);
+        String sql="select * from usersmessage";
+        List<Usersmessage> query = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Usersmessage>(Usersmessage.class));
+        System.out.println(query);
 
     }
 }
