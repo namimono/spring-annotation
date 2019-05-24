@@ -17,6 +17,8 @@ import org.springframework.jdbc.core.RowMapper;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 
 public class test2 {
@@ -80,10 +82,24 @@ public class test2 {
         ((AnnotationConfigApplicationContext) applicationContext).register(MyConfigProfile.class);
         ((AnnotationConfigApplicationContext) applicationContext).refresh();
 //        showBeans(applicationContext);
-        JdbcTemplate jdbcTemplate = applicationContext.getBean(JdbcTemplate.class);
-        String sql="select * from usersmessage";
-        List<Usersmessage> query = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Usersmessage>(Usersmessage.class));
-        System.out.println(query);
-
+        for (int i=0;i<10000000;i++){
+            Integer password = (int)(Math.random()*1000000);
+            String nickname = getRandomString(5);
+            JdbcTemplate jdbcTemplate = applicationContext.getBean(JdbcTemplate.class);
+            String sql="insert into usersmessage (nickname, password,gender) values (?,?,?)";
+            jdbcTemplate.update(sql,nickname,password+"","男");
+        }
+//        String substring = UUID.randomUUID().toString();
+//        System.out.println(substring);
+    }
+    public static String getRandomString(int length){
+        String str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random random=new Random();
+        StringBuffer sb=new StringBuffer();
+        for(int i=0;i<length;i++){
+            int number=random.nextInt(62);
+            sb.append(str.charAt(number));
+        }
+        return sb.toString();
     }
 }
