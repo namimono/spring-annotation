@@ -14,11 +14,6 @@ public class Usersmessage {
   private double balanced;
   private String headurl;
 
-  public Usersmessage(String nickname, String password) {
-    this.nickname = nickname;
-    this.password = password;
-  }
-
   @Override
   public String toString() {
     return "Usersmessage{" +

@@ -1,5 +1,7 @@
-import com.namimono.aop.Calculator;
-import com.namimono.config.*;
+import com.namimono.config.MyConfigProfile;
+import com.namimono.config.MyConfigValue;
+import com.namimono.config.Myconfig;
+import com.namimono.config.MyconfigAutowired;
 import com.namimono.dao.PersonDao;
 import com.namimono.entities.*;
 import com.namimono.service.PersonService;
@@ -99,14 +101,5 @@ public class test2 {
             sb.append(str.charAt(number));
         }
         return sb.toString();
-    }
-
-    @Test
-    public void testAop(){
-        ApplicationContext applicationContext=new AnnotationConfigApplicationContext(MyConfigAop.class);
-        Calculator calculator = applicationContext.getBean(Calculator.class);
-        showBeans(applicationContext);
-        calculator.add(1,2);
-
     }
 }

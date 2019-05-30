@@ -28,7 +28,7 @@ public class MyConfigProfile {
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
         dataSource.setUser("root");
         dataSource.setDriverClass("com.mysql.jdbc.Driver");
-        dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/db_bookstore?characterEncoding=utf8");
+        dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/db_bookstore");
         return dataSource;
     }
     @Bean
