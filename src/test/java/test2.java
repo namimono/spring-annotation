@@ -74,6 +74,7 @@ public class test2 {
         showBeans(applicationContext);
 
     }
+//    test add 1000k
     @Test
     public void testAdd1000k() throws SQLException {
         ApplicationContext applicationContext=new AnnotationConfigApplicationContext();
