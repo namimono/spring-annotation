@@ -107,4 +107,8 @@ public class test2 {
         Calculator calculator = applicationContext.getBean(Calculator.class);
         calculator.add(1,2);
     }
+    @Test
+    public void value(){
+        ApplicationContext applicationContext=new AnnotationConfigApplicationContext(MyConfigValue.class);
+    }
 }
