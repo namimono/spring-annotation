@@ -1,0 +1,20 @@
+1.使用@MapperScan注解扫描Mapper(dao)类，并且注册mapper  //mybatis初始化configuration
+    扫描过程：
+    1).得到当前mapper的所有方法，方法对应的sql，方法返回类型，
+        封装成一个mappedStatement对象，
+        并保存在Configuration configuration对象中的mappedStatements Map集合中.
+2.sqlSession.getMapper()
+    ->DefaultSqlSession中的getMapper()
+        ->configuration.getMapper()
+            ->mapperRegistry.getMapper(type, sqlSession)
+                1).用MapperProxyFactory<T> mapperProxyFactory.newInstance(sqlSession)创建代理对象
+                2).使用jdk代理对象Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Class[] { mapperInterface }, mapperProxy);
+                    其中mapperProxy为MapperProxy类的对象，改类实现了InvocationHandler接口用来invoke()来实现方法内容。
+                    invoke():
+                        1).判断是不是传入的类是不是Object
+                        2).若不是，从cachedMapperMethod中取出方法,
+                            MapperMethod mapperMethod=cachedMapperMethod(method)
+                        3). 执行
+                            mapperMethod.execute(sqlSession, args);
+                            execute会判断sql类型（select,insert,delete,update等）执行原生jdbc代码
+                            ps：调用的是DefaultSqlSession中封装好的增删改查方法。
