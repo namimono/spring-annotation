@@ -6,9 +6,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
@@ -37,9 +40,10 @@ import java.beans.PropertyVetoException;
  *                  8)检查父类是否需要处理，如果父类需要处理返回父类，否则返回null
  *
  */
+@EnableTransactionManagement
 @ComponentScan(value = "com.namimono",includeFilters = {
         @ComponentScan.Filter(type = FilterType.ANNOTATION,classes = {Service.class, Repository.class})
-})
+},useDefaultFilters = false)
 @Configuration
 public class MyconfigTx {
 
@@ -48,7 +52,7 @@ public class MyconfigTx {
         ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
         comboPooledDataSource.setUser("root");
         comboPooledDataSource.setDriverClass("com.mysql.jdbc.Driver");
-        comboPooledDataSource.setJdbcUrl("jdbc:mysql://localhost:3306/hx5847");
+        comboPooledDataSource.setJdbcUrl("jdbc:mysql://localhost:3306/hx5847?useUnicode=true&characterEncoding=utf-8");
         return comboPooledDataSource;
     }
 
@@ -57,5 +61,10 @@ public class MyconfigTx {
 
         return new JdbcTemplate(dataSource());
 
+    }
+    @Bean
+    public PlatformTransactionManager transactionManager() throws PropertyVetoException {
+
+        return new DataSourceTransactionManager(dataSource());
     }
 }

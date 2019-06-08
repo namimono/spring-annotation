@@ -9,13 +9,13 @@ public class testTx {
 
     @Test
     public void test1(){
-        ApplicationContext applicationContext=new AnnotationConfigApplicationContext(MyConfigValue.class);
+        ApplicationContext applicationContext=new AnnotationConfigApplicationContext(MyconfigTx.class);
         String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
         for (String name:beanDefinitionNames){
             System.out.println(name);
         }
-//        UserService userService = applicationContext.getBean(UserService.class);
-//        userService.insertUser("aqua","アイドル");
+        UserService userService = applicationContext.getBean(UserService.class);
+        userService.insertUser("kanna","アイドル");
 
     }
 }
