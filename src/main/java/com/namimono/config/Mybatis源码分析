@@ -16,5 +16,6 @@
                             MapperMethod mapperMethod=cachedMapperMethod(method)
                         3). 执行
                             mapperMethod.execute(sqlSession, args);
-                            execute会判断sql类型（select,insert,delete,update等）执行原生jdbc代码
-                            ps：调用的是DefaultSqlSession中封装好的增删改查方法。
+                            execute会判断sql类型（select,insert,delete,update等）
+                        4).调用的是DefaultSqlSession中的query()方法。
+                            执行原生jdbc代码

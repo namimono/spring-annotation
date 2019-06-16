@@ -1,0 +1,9 @@
+当事务标注在类中的方法上和标注在类上的区别。
+
+1.当事务注解只在类ClassA中的insert()方法上，而get()方法不加事务。
+    1).线程a调用insert方法，insert被事务管理（会被aop中的TransactionInterceptor拦截器链拦截），所以insert添加的数据会存放在
+    mysql的redo log 日志文件中，直到事务提交才会真正修改数据库。
+    2).线程b调用get方法，get不被事务管理，会直接去查询数据库。
+1.当事务注解同时在类ClassA中的insert()和get()方法上时。
+    1).线程a调用insert方法同上。
+    2).线程b调用get方法，由于get方法被事务管理，所以会去redo log中获取数据，此时便会产生脏读、不可重复读、幻读等事务隔离问题。
