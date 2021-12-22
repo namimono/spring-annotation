@@ -1,54 +1,32 @@
-import com.namimono.config.MainConfigOfLifeCycle;
-import com.namimono.config.MyTypeFilter;
-import com.namimono.config.Myconfig;
-import com.namimono.entities.Person;
-import com.namimono.entities.User;
+import com.namimono.aop.Calculator;
+import com.namimono.config.*;
 import org.junit.Test;
+import org.omg.IOP.TransactionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.io.Resource;
 
-import java.util.Map;
+import java.util.Locale;
+
 
 public class test {
 
-    public void showBeans(ApplicationContext applicationContext){
+
+    public void showBeans(ApplicationContext applicationContext) {
         String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
-        for(String name:beanDefinitionNames){
+        for (String name : beanDefinitionNames) {
             System.out.println(name);
         }
     }
-    @Test
-    public void test1(){
-        ApplicationContext applicationContext=new AnnotationConfigApplicationContext(Myconfig.class);
-        Person person= (Person) applicationContext.getBean("person");
-        Person person2= (Person) applicationContext.getBean("person");
-        System.out.println(person==person2);
-    }
 
     @Test
-    public void testCondition(){
-//        aqua属于linux所以不会被注入到IOC中
-        ApplicationContext applicationContext=new AnnotationConfigApplicationContext(Myconfig.class);
-        showBeans(applicationContext);
+    public void test1() {
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MyConfig.class);
+        showBeans(ctx);
     }
 
-    @Test
-    public void testImport(){
-        ApplicationContext applicationContext=new AnnotationConfigApplicationContext(Myconfig.class);
-        showBeans(applicationContext);
-
-
-    }
-
-    @Test
-    public void testLifeCycle(){
-        ApplicationContext applicationContext=new AnnotationConfigApplicationContext(MainConfigOfLifeCycle.class);
-//        User user= (User) applicationContext.getBean("com.namimono.entities.User");
-
-//        applicationContext.getBean("dog");
-//        showBeans(applicationContext);
-
-        ((AnnotationConfigApplicationContext) applicationContext).close();
-    }
 
 }

@@ -1,10 +1,5 @@
 package com.namimono.config;
 
-import com.namimono.dao.PersonDao;
-import com.namimono.entities.Animal;
-import com.namimono.entities.Cat;
-import com.namimono.entities.Dog;
-import com.namimono.entities.Person;
 import org.springframework.context.annotation.*;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -55,8 +50,7 @@ import org.springframework.stereotype.Service;
  *
  */
 @ComponentScan(value = {"com.namimono"},includeFilters = {
-        @ComponentScan.Filter(type = FilterType.ANNOTATION,classes = {Controller.class, Service.class, Repository.class}),
-        @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,classes = {Dog.class})
+        @ComponentScan.Filter(type = FilterType.ANNOTATION,classes = {Controller.class, Service.class, Repository.class})
 },useDefaultFilters = false)
 @Configuration
 public class MyconfigAutowired{

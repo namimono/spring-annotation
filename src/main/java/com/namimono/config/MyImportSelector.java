@@ -1,6 +1,5 @@
 package com.namimono.config;
 
-import com.namimono.entities.User;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 

@@ -1,7 +1,6 @@
 package com.namimono.config;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import com.namimono.entities.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
